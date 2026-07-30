@@ -63,3 +63,17 @@ jobs:
           git add preview.png
           git commit -m "chore: automated viewport sync preview image [skip ci]" || exit 0
           git push
+
+# Paste the following snippet into your repository's workflow file to trigger this workflow on deployment status events.
+
+# name: Automated Live Preview Capture
+
+# on:
+#   deployment_status:
+
+# jobs:
+#   call-capture:
+#     if: github.event.deployment_status.state == 'success'
+#     uses: christianbihasa/dev-toolkit/.github/workflows/capture-preview.yml@main
+#     permissions:
+#       contents: write
