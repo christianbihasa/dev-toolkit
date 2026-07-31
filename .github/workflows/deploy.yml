@@ -58,3 +58,26 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+# Paste the following snippet into your workflow to call this workflow and deploy to GitHub Pages
+
+# name: Deploy to GitHub Pages
+
+# on:
+#   push:
+#     branches: ["main"]
+
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
+
+# concurrency:
+#   group: "pages"
+#   cancel-in-progress: true
+
+# jobs:
+#   call-deploy:
+#     uses: christianbihasa/dev-toolkit/.github/workflows/deploy.yml@main
+#     with:
+#       build-path: './dist'
