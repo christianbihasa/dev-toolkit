@@ -1,0 +1,60 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: 'Node.js runtime version'
+        required: false
+        type: string
+        default: '22'
+      build-path:
+        description: 'Path to build output directory (e.g. ./dist, ./build, ./out)'
+        required: false
+        type: string
+        default: './dist'
+      run-build:
+        description: 'Whether to execute npm run build'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Application Bundle
+        if: ${{ inputs.run-build }}
+        run: npm run build
+
+      - name: Setup Pages Settings Interface
+        uses: actions/configure-pages@v5
+
+      - name: Upload Compile Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ inputs.build-path }}
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
