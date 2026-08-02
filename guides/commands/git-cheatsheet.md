@@ -36,3 +36,30 @@ git reset --hard HEAD@{3}
 ```bash
 git commit --amend -m "new commit message"
 ```
+
+### 2. Branching & Cleanup
+
+#### Rename Current Branch
+
+```bash
+git branch -M new-branch-name
+```
+
+#### Delete Local & Remote Branches
+
+```bash
+# Delete local branch
+git branch -d branch-name
+
+# Force delete local branch (if unmerged)
+git branch -D branch-name
+
+# Delete remote branch
+git push origin --delete branch-name
+```
+
+#### Prune Stale Remote Tracking Branches (Clean up local references to branches that were deleted on GitHub)
+
+```bash
+git fetch --prune
+```
