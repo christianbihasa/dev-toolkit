@@ -63,3 +63,19 @@ git push origin --delete branch-name
 ```bash
 git fetch --prune
 ```
+
+### 3. Stashing Quick References
+
+```bash
+# Stash untracked and tracked files with a clear label
+git stash save -u "work in progress on auth flow"
+
+# List stashes
+git stash list
+
+# Apply most recent stash and remove it from list
+git stash pop
+
+# Apply specific stash without removing it
+git stash apply stash@{1}
+```
