@@ -2,6 +2,7 @@
 
 # ==============================================================================
 # dev-toolkit Bootstrap Script
+# Requires: chmod +x scripts/bootstrap.sh
 # Usage: ./scripts/bootstrap.sh /path/to/target-project
 # Description: Copies workflow templates and configs into a target repository.
 # ==============================================================================
