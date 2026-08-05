@@ -25,7 +25,7 @@ jobs:
 
       - name: Generate and Run Capture Script
         env:
-          DEPLOY_URL: ${{ github.event.deployment_status.target_url }}
+          ENV_URL: ${{ github.event.deployment_status.environment_url }}
           REPO_NAME: ${{ github.event.repository.name }}
           REPO_OWNER: ${{ github.repository_owner }}
         run: |
@@ -37,8 +37,8 @@ jobs:
             
             await page.setViewportSize({ width: 1000, height: 1300 });
             
-            // Uses live deployment target URL, or constructs the GitHub Pages URL as fallback
-            const targetUrl = process.env.DEPLOY_URL || `https://${process.env.REPO_OWNER}.github.io/${process.env.REPO_NAME}`;
+            // Prefers live environment URL, falls back to standard GitHub Pages URL
+            const targetUrl = process.env.ENV_URL || `https://${process.env.REPO_OWNER}.github.io/${process.env.REPO_NAME}`;
             console.log(`Capturing preview for: ${targetUrl}`);
 
             await page.goto(targetUrl, {
