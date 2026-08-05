@@ -62,6 +62,8 @@ jobs:
 
           git add preview.png
           git commit -m "chore: automated viewport sync preview image [skip ci]" || exit 0
+          git fetch origin main
+          git rebase origin/main
           git push
 
 # Paste the following snippet into your repository's workflow file to trigger this workflow on deployment status events.
