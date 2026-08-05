@@ -60,15 +60,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Discard untracked modifications (like package-lock.json changes from npm install)
-          git checkout -- .
-
-          # Stage and commit preview asset
           git add preview.png
           git commit -m "chore: automated viewport sync preview image [skip ci]" || exit 0
-
-          # Sync with remote before pushing
-          git pull origin main --rebase
           git push
 
 # Paste the following snippet into your repository's workflow file to trigger this workflow on deployment status events.
