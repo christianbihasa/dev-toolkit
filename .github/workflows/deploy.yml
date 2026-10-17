@@ -8,8 +8,13 @@ on:
         required: false
         type: string
         default: '22'
+      working-directory:
+        description: 'Directory containing package.json, relative to the repo root (e.g. ., ./frontend)'
+        required: false
+        type: string
+        default: '.'
       build-path:
-        description: 'Path to build output directory (e.g. ./dist, ./build, ./out)'
+        description: 'Path to build output directory, relative to the repo root (e.g. ./dist, ./frontend/dist)'
         required: false
         type: string
         default: './dist'
@@ -29,6 +34,9 @@ jobs:
       contents: read
       pages: write
       id-token: write
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
 
     steps:
       - name: Checkout Codebase
@@ -39,6 +47,7 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: "npm"
+          cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
 
       - name: Install Dependencies
         run: npm ci
@@ -81,3 +90,6 @@ jobs:
 #     uses: christianbihasa/dev-toolkit/.github/workflows/deploy.yml@main
 #     with:
 #       build-path: './dist'
+#       # For an app in a subfolder:
+#       # working-directory: './frontend'
+#       # build-path: './frontend/dist'
