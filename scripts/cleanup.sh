@@ -18,3 +18,7 @@ sys.stdout.write("".join(
 
 # Finish with:
 # git push --force-with-lease
+
+# If it fails, do:
+# git fetch origin
+# git push --force-with-lease origin main
