@@ -15,3 +15,6 @@ sys.stdout.write("".join(
 
 # Run after to verify if Co-author lines are removed
 # git log -100 --format="%h %s%n%b" | Select-String "Co-Authored-By:"
+
+# Finish with:
+# git push --force-with-lease
